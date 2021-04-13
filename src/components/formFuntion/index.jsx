@@ -8,7 +8,6 @@ import { MyContext } from "../../App";
 
 export default function Form() {
   const [state, dispatch] = React.useReducer(reducer, initialState);
-
   const myInterval = React.useRef();
   const myInput = React.useRef();
 
@@ -26,14 +25,12 @@ export default function Form() {
   };
 
   React.useEffect(() => {
-    //funcion get que recoja la información
+    myInterval.current = setInterval(() => {
+      setCount(count + 1);
+    }, 1000);
 
-    myInterval.current = setInterval(() => {}, 1000);
-
-    return () => {
-      clearInterval(myInterval.current);
-    };
-  }, []);
+    return () => clearInterval(myInterval.current);
+  }, [count]);
 
   const focusInput = () => {
     console.log(myInput.current);
